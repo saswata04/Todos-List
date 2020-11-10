@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+
+{% block title %}ToDos - All Tasks{% endblock title %}
+
+{% block all_tasks_status %}active{% endblock all_tasks_status %}
+
+
+{% block contents %}
+<div class="container text-center">
+    <h3>All Tasks</h3>
+</div>
+
+<div class="container mb-5">
+    <table id="myTable" class="table" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td><strong>{{ task.taskTitle }}</strong></td>
+                <td style='width: 50%'>{{ task.taskDesc }}</td>
+                <td>Last Update: {{ task.dateTime.date }} {{ task.dateTime.time }}
+
+                    <div class="float-right">
+                        <a class="btn btn-sm btn-info mx-2 my-1" href="{% url 'update_task' task.id %}">Update</a>
+                        <a class="btn btn-sm btn-danger mx-2 my-1" href="{% url 'delete' task.id %}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock contents %}
